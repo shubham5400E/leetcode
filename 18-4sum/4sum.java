@@ -12,7 +12,7 @@ class Solution {
                 long sum=(long)nums[i]+nums[j]+nums[left]+nums[right];
 
                 if(sum==target){
-                    ls.add(Arrays.asList(nums[i],nums[j],nums[left],nums[right]));
+                    ls.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[left], nums[right])));
                     left++;
                     right--;
                     while(left<right&&nums[left]==nums[left-1])left++;
