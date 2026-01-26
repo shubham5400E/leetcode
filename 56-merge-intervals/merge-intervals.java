@@ -8,7 +8,7 @@ class Solution {
                 ans[a][0]=intervals[i][0];
                 ans[a][1]=intervals[i][1];
                 a++;
-            }else if ((intervals[i][0]<=ans[a-1][1]&&intervals[i][0]>=ans[a-1][0])||(intervals[i][1]<=ans[a-1][1]&&intervals[i][1]>=ans[a-1][0])||(intervals[i][0]<ans[a-1][0]&&intervals[i][1]>ans[a-1][1] )){
+            }else if (intervals[i][0] <= ans[a - 1][1]){
                 ans[a-1][0]=Math.min(intervals[i][0],ans[a-1][0]);
                 ans[a-1][1]=Math.max(intervals[i][1],ans[a-1][1]);
 
