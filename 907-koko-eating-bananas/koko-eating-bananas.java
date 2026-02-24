@@ -19,7 +19,7 @@ class Solution {
     long count(int[] piles,int mid){
         long total=0;
         for(int p:piles){
-            total+=(p + mid - 1L) / mid;
+            total+=(p + mid - 1) / mid;
         }
         return total;
     }
