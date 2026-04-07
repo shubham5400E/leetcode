@@ -2,11 +2,9 @@ class Solution {
     static final long MOD = 1_000_000_007;
 
     public int countGoodNumbers(long n) {
-        long half=n/2;
-        long a=half;
         long even =(n+1)/2;
         long odd=(n)/2;
-        long ans =pow(4,odd)*pow(5,even)%MOD;
+        long ans =(pow(4,odd)%MOD*pow(5,even)%MOD)%MOD;
         return (int)ans;
 
     }long  pow(long x,long n){
