@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+      List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> nums = new ArrayList<>();
+        // Call the recursive function with initial parameters
+        func(n, 1, nums, k, ans);
+        return ans;   
+    }
+      private void func(int sum, int i, List<Integer> nums, int k, List<List<Integer>> ans) {
+        if (sum == 0 && nums.size() == k) {
+            ans.add(new ArrayList<>(nums));
+            return;
+        }
+        if (sum <= 0 || nums.size() > k || i>9) return;
+
+            if (i <= sum) {
+                nums.add(i);
+                func(sum - i, i + 1, nums, k, ans);
+                nums.remove(nums.size() - 1);
+            }
+        func(sum, i + 1, nums, k, ans);
+
+}
+}
