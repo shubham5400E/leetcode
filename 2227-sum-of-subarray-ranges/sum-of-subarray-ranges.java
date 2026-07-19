@@ -1,31 +1,68 @@
 class Solution {
-    public long subArrayRanges(int[] arr) {
-          int n = arr.length;
-
-        // Variable to store the final sum
-        long sum = 0;
-
-        // Traverse each starting index of subarrays
-        for (int i = 0; i < n; i++) {
-
-            // Initialize smallest and largest for current subarray
-            int smallest = arr[i];
-            int largest = arr[i];
-
-            // Traverse subarrays starting from i
-            for (int j = i; j < n; j++) {
-                // Update smallest element seen so far
-                smallest = Math.min(smallest, arr[j]);
-
-                // Update largest element seen so far
-                largest = Math.max(largest, arr[j]);
-
-                // Add the current range (max - min) to the total sum
-                sum += (largest - smallest);
-            }
-        }
-
-        // Return the computed total sum
-        return sum;
+    public long subArrayRanges(int[] nums) {
+        return sumSubarrayMax(nums)-sumSubarrayMins(nums);
     }
+    public long sumSubarrayMax(int[] arr) {
+    Stack<Integer> st=new Stack<>();
+    Stack<Integer> st1=new Stack<>();
+
+    int n=arr.length;
+    int[] prev=new int[arr.length];
+    int[] next=new int[arr.length];
+
+    for(int i=0;i<n;i++){
+        while(!st.isEmpty() && arr[st.peek()]<arr[i]){
+            st.pop();
+        }
+        prev[i]=st.isEmpty() ? -1:st.peek();
+        st.push(i);
+    }
+     for(int i=n-1;i>=0;i--){
+        while(!st1.isEmpty() && arr[st1.peek()]<=arr[i]){
+            st1.pop();
+        }
+        next[i]=st1.isEmpty() ? n:st1.peek();
+        st1.push(i);
+    }
+    long sum=0;
+    for(int i=0;i<n;i++){
+
+      long left = i - prev[i];
+            long right = next[i] - i;
+            sum = sum + left * right * arr[i];
+            }
+    return sum;
+    }
+    public long sumSubarrayMins(int[] arr) {
+    Stack<Integer> st=new Stack<>();
+    Stack<Integer> st1=new Stack<>();
+
+    int n=arr.length;
+    int[] prev=new int[arr.length];
+    int[] next=new int[arr.length];
+
+    for(int i=0;i<n;i++){
+        while(!st.isEmpty() && arr[st.peek()]>arr[i]){
+            st.pop();
+        }
+        prev[i]=st.isEmpty() ? -1:st.peek();
+        st.push(i);
+    }
+     for(int i=n-1;i>=0;i--){
+        while(!st1.isEmpty() && arr[st1.peek()]>=arr[i]){
+            st1.pop();
+        }
+        next[i]=st1.isEmpty() ? n:st1.peek();
+        st1.push(i);
+    }
+    long sum=0;
+    for(int i=0;i<n;i++){
+
+      long left = i - prev[i];
+            long right = next[i] - i;
+            sum = sum + left * right * arr[i];
+            }
+    return sum;
+    }
+    
 }
